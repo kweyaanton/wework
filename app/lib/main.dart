@@ -48,8 +48,8 @@ class _loginpageState extends State<loginpage> {
       child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.start,
-        children: const [
-          Text(
+        children: [
+          const Text(
             "WeWork",
             style: TextStyle(
               color: Colors.black,
@@ -57,21 +57,58 @@ class _loginpageState extends State<loginpage> {
               fontWeight: FontWeight.bold,
             ),
           ),
-          Text(
+          const Text(
             "login to your App",
             style: TextStyle(
                 color: Colors.blue,
                 fontSize: 44.0,
                 fontWeight: FontWeight.bold),
           ),
-          SizedBox(
+          const SizedBox(
             height: 44.0,
           ),
-          TextField(
+          const TextField(
             keyboardType: TextInputType.emailAddress,
-            decoration: const InputDecoration(
-                hintText: "User Email",
-                prefixIcon: Icon(Icons.mail, color: Colors.black)),
+            decoration: InputDecoration(
+              hintText: "User Email",
+              prefixIcon: Icon(Icons.mail, color: Colors.black),
+            ),
+          ),
+          const SizedBox(
+            height: 26.0,
+          ),
+          const TextField(
+            obscureText: true,
+            decoration: InputDecoration(
+              hintText: "User Password",
+              prefixIcon: Icon(Icons.lock, color: Colors.black),
+            ),
+          ),
+          const SizedBox(
+            height: 12.0,
+          ),
+          const Text(
+            "Dont Remember your password",
+            style: TextStyle(color: Colors.blue),
+          ),
+          const SizedBox(
+            height: 88.0,
+          ),
+          Container(
+            width: double.infinity,
+            child: RawMaterialButton(
+              fillColor: Color(0xFF0069FE),
+              elevation: 0.0,
+              padding: EdgeInsets.symmetric(vertical: 20.0),
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(12.0)),
+              onPressed: () {},
+              child: Text("Login",
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 18.0,
+                  )),
+            ),
           ),
         ],
       ),
