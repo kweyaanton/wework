@@ -1,16 +1,6 @@
-# app
-
-A new Flutter project.
+# Flutter UI - Login and Sign Up | Speed Code | With source code
 
 ## Getting Started
 
-This project is a starting point for a Flutter application.
+<img src="https://user-images.githubusercontent.com/33403844/152976390-704136f7-77de-4de4-8846-e3b05c45aa16.png" width='550'>
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
