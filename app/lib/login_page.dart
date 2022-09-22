@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:app/page/profile_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -13,7 +14,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   //login function
-  static Future<User?> singIn(
+  static Future<User?> loginUsingEmailPassword(
       {required String email,
       required String password,
       required BuildContext context}) async {
@@ -38,7 +39,7 @@ class _LoginPageState extends State<LoginPage> {
     // creat the textfiled
     TextEditingController _emailcontroller = TextEditingController();
     TextEditingController _passwordcontroller = TextEditingController();
-    
+
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -125,7 +126,17 @@ class _LoginPageState extends State<LoginPage> {
                   padding: EdgeInsets.symmetric(vertical: 20.0),
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(12.0)),
-                  onPressed: () {},
+                  onPressed: () async {
+                    User? user = await loginUsingEmailPassword(
+                        email: _emailcontroller.text,
+                        password: _passwordcontroller.text,
+                        context: context);
+                    print(user);
+                    if (user != null) {
+                      Navigator.of(context).pushReplacement(MaterialPageRoute(
+                          builder: (context) => ProfilePage()));
+                    }
+                  },
                   child: Text("login",
                       style: TextStyle(
                         color: Colors.white,
