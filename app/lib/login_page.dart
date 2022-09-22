@@ -1,5 +1,6 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 
@@ -11,8 +12,33 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  //login function
+  static Future<User?> singIn(
+      {required String email,
+      required String password,
+      required BuildContext context}) async {
+    FirebaseAuth auth = FirebaseAuth.instance;
+    User? user;
+    try {
+      UserCredential userCredential = await auth.signInWithEmailAndPassword(
+        email: email,
+        password: password,
+      );
+      user = userCredential.user;
+    } on FirebaseAuthException catch (e) {
+      if (e.code == "user-no-found") {
+        print("No User Found For that Email ");
+      }
+    }
+    return user;
+  }
+
   @override
   Widget build(BuildContext context) {
+    // creat the textfiled
+    TextEditingController _emailcontroller = TextEditingController();
+    TextEditingController _passwordcontroller = TextEditingController();
+    
     return Scaffold(
       backgroundColor: Colors.grey[300],
       body: SafeArea(
@@ -56,6 +82,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: _emailcontroller,
                       decoration: InputDecoration(
                         border: InputBorder.none,
                         hintText: 'Email',
@@ -78,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
                   child: Padding(
                     padding: const EdgeInsets.only(left: 20.0),
                     child: TextField(
+                      controller: _passwordcontroller,
                       obscureText: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -89,25 +117,23 @@ class _LoginPageState extends State<LoginPage> {
               ),
               SizedBox(height: 10),
               //sign in
-              Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 25.0),
-                child: Container(
-                  padding: EdgeInsets.all(25),
-                  decoration: BoxDecoration(
-                    color: Colors.deepOrange,
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  child: Center(
-                      child: Text(
-                    'Sign In',
-                    style: TextStyle(
-                      color: Colors.white,
-                      fontWeight: FontWeight.bold,
-                      fontSize: 18,
-                    ),
-                  )),
+              Container(
+                width: double.infinity,
+                child: RawMaterialButton(
+                  fillColor: Color(0xFF0069FE),
+                  elevation: 0.0,
+                  padding: EdgeInsets.symmetric(vertical: 20.0),
+                  shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12.0)),
+                  onPressed: () {},
+                  child: Text("login",
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 18.0,
+                      )),
                 ),
               ),
+
               SizedBox(height: 25),
 
               //not a member register
