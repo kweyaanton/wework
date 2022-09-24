@@ -147,6 +147,7 @@ class _LoginPageState extends State<LoginPage> {
 
                         //sign in
                         Container(
+                          padding: const EdgeInsets.symmetric(horizontal: 25.0),
                           width: double.infinity,
                           child: RawMaterialButton(
                             fillColor: Color.fromARGB(255, 93, 114, 144),

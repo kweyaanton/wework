@@ -169,9 +169,10 @@ class _SignupPageState extends State<SignupPage> {
                         height: 22,
                       ),
                       Container(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
                         width: double.infinity,
                         child: RawMaterialButton(
-                          fillColor: Color(0xFF0069FE),
+                          fillColor: Color.fromARGB(255, 83, 111, 99),
                           elevation: 0.0,
                           padding: EdgeInsets.symmetric(vertical: 20.0),
                           shape: RoundedRectangleBorder(
@@ -188,7 +189,7 @@ class _SignupPageState extends State<SignupPage> {
                                       builder: (context) => LoginPage()));
                             }
                           },
-                          child: Text("singup",
+                          child: Text("sign up",
                               style: TextStyle(
                                 color: Colors.white,
                                 fontSize: 18.0,
