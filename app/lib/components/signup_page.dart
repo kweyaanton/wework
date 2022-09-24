@@ -1,13 +1,11 @@
 import 'dart:io';
-import 'package:email_validator/email_validator.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:login_signup/components/common/page_header.dart';
 import 'package:login_signup/components/common/page_heading.dart';
 import 'package:login_signup/components/login_page.dart';
-
-import 'package:login_signup/components/common/custom_form_button.dart';
 import 'package:login_signup/components/common/custom_input_field.dart';
 
 class SignupPage extends StatefulWidget {
@@ -18,7 +16,6 @@ class SignupPage extends StatefulWidget {
 }
 
 class _SignupPageState extends State<SignupPage> {
-
   File? _profileImage;
 
   final _signupFormKey = GlobalKey<FormState>();
@@ -26,7 +23,7 @@ class _SignupPageState extends State<SignupPage> {
   Future _pickProfileImage() async {
     try {
       final image = await ImagePicker().pickImage(source: ImageSource.gallery);
-      if(image == null) return;
+      if (image == null) return;
 
       final imageTemporary = File(image.path);
       setState(() => _profileImage = imageTemporary);
@@ -35,8 +32,20 @@ class _SignupPageState extends State<SignupPage> {
     }
   }
 
+  Future Signup({
+    required String email,
+    required String password,
+  }) async {
+    await FirebaseAuth.instance
+        .createUserWithEmailAndPassword(email: email, password: password);
+  }
+
   @override
   Widget build(BuildContext context) {
+    // creat the textfiled
+    TextEditingController _emailcontroller = TextEditingController();
+    TextEditingController _passwordcontroller = TextEditingController();
+
     return SafeArea(
       child: Scaffold(
         backgroundColor: const Color(0xffEEF1F3),
@@ -49,17 +58,23 @@ class _SignupPageState extends State<SignupPage> {
                 Container(
                   decoration: const BoxDecoration(
                     color: Colors.white,
-                    borderRadius: BorderRadius.vertical(top: Radius.circular(20),),
+                    borderRadius: BorderRadius.vertical(
+                      top: Radius.circular(20),
+                    ),
                   ),
                   child: Column(
                     children: [
-                      const PageHeading(title: 'Sign-up',),
+                      const PageHeading(
+                        title: 'Sign-up',
+                      ),
                       SizedBox(
                         width: 130,
                         height: 130,
                         child: CircleAvatar(
                           backgroundColor: Colors.grey.shade200,
-                          backgroundImage: _profileImage != null ? FileImage(_profileImage!) : null,
+                          backgroundImage: _profileImage != null
+                              ? FileImage(_profileImage!)
+                              : null,
                           child: Stack(
                             children: [
                               Positioned(
@@ -72,7 +87,8 @@ class _SignupPageState extends State<SignupPage> {
                                     width: 50,
                                     decoration: BoxDecoration(
                                       color: Colors.blue.shade400,
-                                      border: Border.all(color: Colors.white, width: 3),
+                                      border: Border.all(
+                                          color: Colors.white, width: 3),
                                       borderRadius: BorderRadius.circular(25),
                                     ),
                                     child: const Icon(
@@ -87,78 +103,135 @@ class _SignupPageState extends State<SignupPage> {
                           ),
                         ),
                       ),
-                      const SizedBox(height: 16,),
+                      const SizedBox(
+                        height: 16,
+                      ),
                       CustomInputField(
                           labelText: 'Name',
                           hintText: 'Your name',
                           isDense: true,
                           validator: (textValue) {
-                            if(textValue == null || textValue.isEmpty) {
+                            if (textValue == null || textValue.isEmpty) {
                               return 'Name field is required!';
                             }
                             return null;
-                          }
+                          }),
+                      const SizedBox(
+                        height: 16,
                       ),
-                      const SizedBox(height: 16,),
-                      CustomInputField(
-                          labelText: 'Email',
-                          hintText: 'Your email id',
-                          isDense: true,
-                          validator: (textValue) {
-                            if(textValue == null || textValue.isEmpty) {
-                              return 'Email is required!';
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: TextField(
+                              controller: _emailcontroller,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'Email',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      const SizedBox(
+                        height: 16,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 25.0),
+                        child: Container(
+                          decoration: BoxDecoration(
+                            color: Colors.grey[200],
+                            border: Border.all(color: Colors.white),
+                            borderRadius: BorderRadius.circular(12),
+                          ),
+                          child: Padding(
+                            padding: const EdgeInsets.only(left: 20.0),
+                            child: TextField(
+                              controller: _passwordcontroller,
+                              decoration: InputDecoration(
+                                border: InputBorder.none,
+                                hintText: 'password',
+                              ),
+                            ),
+                          ),
+                        ),
+                      ),
+                      const SizedBox(
+                        height: 22,
+                      ),
+                      Container(
+                        width: double.infinity,
+                        child: RawMaterialButton(
+                          fillColor: Color(0xFF0069FE),
+                          elevation: 0.0,
+                          padding: EdgeInsets.symmetric(vertical: 20.0),
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(12.0)),
+                          onPressed: () async {
+                            User? user = await Signup(
+                              email: _emailcontroller.text,
+                              password: _passwordcontroller.text,
+                            );
+                            print(user);
+                            if (user != null) {
+                              Navigator.of(context).pushReplacement(
+                                  MaterialPageRoute(
+                                      builder: (context) => LoginPage()));
                             }
-                            if(!EmailValidator.validate(textValue)) {
-                              return 'Please enter a valid email';
-                            }
-                            return null;
-                          }
+                          },
+                          child: Text("singup",
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 18.0,
+                              )),
+                        ),
                       ),
-                      const SizedBox(height: 16,),
-                      CustomInputField(
-                          labelText: 'Contact no.',
-                          hintText: 'Your contact number',
-                          isDense: true,
-                          validator: (textValue) {
-                            if(textValue == null || textValue.isEmpty) {
-                              return 'Contact number is required!';
-                            }
-                            return null;
-                          }
+                      const SizedBox(
+                        height: 18,
                       ),
-                      const SizedBox(height: 16,),
-                      CustomInputField(
-                        labelText: 'Password',
-                        hintText: 'Your password',
-                        isDense: true,
-                        obscureText: true,
-                        validator: (textValue) {
-                          if(textValue == null || textValue.isEmpty) {
-                            return 'Password is required!';
-                          }
-                          return null;
-                        },
-                        suffixIcon: true,
-                      ),
-                      const SizedBox(height: 22,),
-                      CustomFormButton(innerText: 'Signup', onPressed: _handleSignupUser,),
-                      const SizedBox(height: 18,),
                       SizedBox(
                         child: Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
-                            const Text('Already have an account ? ', style: TextStyle(fontSize: 13, color: Color(0xff939393), fontWeight: FontWeight.bold),),
+                            const Text(
+                              'Already have an account ? ',
+                              style: TextStyle(
+                                  fontSize: 13,
+                                  color: Color(0xff939393),
+                                  fontWeight: FontWeight.bold),
+                            ),
                             GestureDetector(
                               onTap: () => {
-                                Navigator.push(context, MaterialPageRoute(builder: (context) => const LoginPage()))
+                                Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                        builder: (context) =>
+                                            const LoginPage()))
                               },
-                              child: const Text('Log-in', style: TextStyle(fontSize: 15, color: Color(0xff748288), fontWeight: FontWeight.bold),),
+                              child: const Text(
+                                'Log-in',
+                                style: TextStyle(
+                                    fontSize: 15,
+                                    color: Color(0xff748288),
+                                    fontWeight: FontWeight.bold),
+                              ),
                             ),
                           ],
                         ),
                       ),
-                      const SizedBox(height: 30,),
+                      const SizedBox(
+                        height: 30,
+                      ),
                     ],
                   ),
                 ),
@@ -168,14 +241,5 @@ class _SignupPageState extends State<SignupPage> {
         ),
       ),
     );
-  }
-
-  void _handleSignupUser() {
-    // signup user
-    if (_signupFormKey.currentState!.validate()) {
-      ScaffoldMessenger.of(context).showSnackBar(
-        const SnackBar(content: Text('Submitting data..')),
-      );
-    }
   }
 }

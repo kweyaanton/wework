@@ -4,7 +4,6 @@ import 'package:login_signup/components/common/page_header.dart';
 import 'package:login_signup/components/forget_password_page.dart';
 import 'package:login_signup/components/signup_page.dart';
 import 'package:login_signup/components/common/page_heading.dart';
-
 import 'package:login_signup/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -150,7 +149,7 @@ class _LoginPageState extends State<LoginPage> {
                         Container(
                           width: double.infinity,
                           child: RawMaterialButton(
-                            fillColor: Color(0xFF0069FE),
+                            fillColor: Color.fromARGB(255, 93, 114, 144),
                             elevation: 0.0,
                             padding: EdgeInsets.symmetric(vertical: 20.0),
                             shape: RoundedRectangleBorder(
@@ -223,13 +222,4 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
-
-  // void _handleLoginUser() {
-  // login user
-  // if (_loginFormKey.currentState!.validate()) {
-  // ScaffoldMessenger.of(context).showSnackBar(
-  // const SnackBar(content: Text('Submitting data..')),
-  //);
-  // }
-  // }
 }
