@@ -4,6 +4,7 @@ import 'package:login_signup/components/common/page_header.dart';
 import 'package:login_signup/components/forget_password_page.dart';
 import 'package:login_signup/components/signup_page.dart';
 import 'package:login_signup/components/common/page_heading.dart';
+import 'package:login_signup/new/master.dart';
 import 'package:login_signup/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -164,7 +165,7 @@ class _LoginPageState extends State<LoginPage> {
                               if (user != null) {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                        builder: (context) => ProfilePage()));
+                                        builder: (context) => Master()));
                               }
                             },
                             child: Text("login",
