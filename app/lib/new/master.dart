@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:login_signup/new/wallet.dart';
+import 'package:login_signup/pages/create_resume.dart';
+import 'package:login_signup/pages/mobile_page.dart';
 import 'applications.dart';
 import 'jobs.dart';
 import 'data.dart';
@@ -67,6 +70,9 @@ class _MasterState extends State<Master> {
             case "Applications":
               currentWidgetView = Applications();
               break;
+            case "wallet":
+              currentWidgetView = MobileWidget();
+              break;
           }
           selectedItem = item;
         });
@@ -94,7 +100,7 @@ class _MasterState extends State<Master> {
                         width: 8,
                         height: 8,
                         decoration: BoxDecoration(
-                          color: Colors.black,
+                          color: Color.fromARGB(255, 81, 32, 32),
                           shape: BoxShape.circle,
                         ),
                       ),

@@ -51,7 +51,7 @@ class _JobsState extends State<Jobs> {
                   padding:
                       EdgeInsets.only(right: 32, left: 32, top: 8, bottom: 20),
                   child: Text(
-                    "Developer \nJobs",
+                    "available \nJobs",
                     style: TextStyle(
                         fontSize: 32, fontWeight: FontWeight.bold, height: 1.2),
                   ),
@@ -63,10 +63,10 @@ class _JobsState extends State<Jobs> {
                     spacing: 16,
                     runSpacing: 16,
                     children: [
-                      buildFilterOption("Developer"),
-                      buildFilterOption("San Francisco"),
-                      buildFilterOption(r"$30 - 50h"),
-                      buildFilterOption("Part-Time"),
+                      buildFilterOption("basic math"),
+                      buildFilterOption(r"5k - 10k"),
+                      buildFilterOption("near you"),
+                      buildFilterOption("physical labour"),
                     ],
                   ),
                 ),
