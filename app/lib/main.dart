@@ -50,8 +50,3 @@ class _HomePageState extends State<HomePage> {
     );
   }
 }
-<<<<<<< HEAD
-=======
-
-  
->>>>>>> 137985b8d26c59e73177c8acbde71d59c61f3c67
