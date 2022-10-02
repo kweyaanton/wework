@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup/new/wallet.dart';
 import 'package:login_signup/pages/create_resume.dart';
-import 'package:login_signup/pages/mobile_page.dart';
 import 'applications.dart';
 import 'jobs.dart';
 import 'data.dart';
+import 'wallet.dart';
 
 class Master extends StatefulWidget {
   @override
@@ -71,7 +71,7 @@ class _MasterState extends State<Master> {
               currentWidgetView = Applications();
               break;
             case "wallet":
-              currentWidgetView = MobileWidget();
+              currentWidgetView = wallet();
               break;
           }
           selectedItem = item;
