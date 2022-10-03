@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:login_signup/new/wallet.dart';
-import 'package:login_signup/pages/create_resume.dart';
 import 'applications.dart';
 import 'jobs.dart';
 import 'data.dart';
-import 'wallet.dart';
 
 class Master extends StatefulWidget {
   @override
