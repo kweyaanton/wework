@@ -170,12 +170,15 @@ class _JobsState extends State<Jobs> {
     return list;
   }
 
-  Widget buildRecommendation(Job job) {
+  Widget buildRecommendation(Job jobb) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => JobDetail(job: job)),
+          MaterialPageRoute(
+              builder: (context) => JobDetail(
+                    jobb: jobb,
+                  )),
         );
       },
       child: Container(
@@ -198,8 +201,9 @@ class _JobsState extends State<Jobs> {
                   height: 50,
                   width: 50,
                   decoration: BoxDecoration(
+                    color: Colors.grey[200],
                     image: DecorationImage(
-                      image: AssetImage(job.logo),
+                      image: AssetImage(jobb.logo),
                       fit: BoxFit.fitWidth,
                     ),
                     borderRadius: BorderRadius.all(
@@ -220,7 +224,7 @@ class _JobsState extends State<Jobs> {
                       vertical: 4,
                     ),
                     child: Text(
-                      job.concept,
+                      jobb.concept,
                       style: TextStyle(
                         fontWeight: FontWeight.bold,
                         fontSize: 14,
@@ -236,7 +240,7 @@ class _JobsState extends State<Jobs> {
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
                   Text(
-                    job.position,
+                    jobb.position,
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 16,
@@ -246,7 +250,7 @@ class _JobsState extends State<Jobs> {
                     height: 8,
                   ),
                   Text(
-                    r"$" + job.price + "/h",
+                    r"$" + jobb.price + "/h",
                     style: TextStyle(
                       fontWeight: FontWeight.bold,
                       fontSize: 24,
@@ -269,12 +273,15 @@ class _JobsState extends State<Jobs> {
     return list;
   }
 
-  Widget buildLastJob(Job job) {
+  Widget buildLastJob(Job jobb) {
     return GestureDetector(
       onTap: () {
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => JobDetail(job: job)),
+          MaterialPageRoute(
+              builder: (context) => JobDetail(
+                    jobb: jobb,
+                  )),
         );
       },
       child: Container(
@@ -293,7 +300,7 @@ class _JobsState extends State<Jobs> {
               width: 45,
               decoration: BoxDecoration(
                 image: DecorationImage(
-                  image: AssetImage(job.logo),
+                  image: AssetImage(jobb.logo),
                   fit: BoxFit.fitWidth,
                 ),
                 borderRadius: BorderRadius.all(
@@ -308,14 +315,14 @@ class _JobsState extends State<Jobs> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    job.position,
+                    jobb.position,
                     style: TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.bold,
                     ),
                   ),
                   Text(
-                    job.company,
+                    jobb.company,
                     style: TextStyle(
                       fontSize: 14,
                       fontWeight: FontWeight.bold,
@@ -326,7 +333,7 @@ class _JobsState extends State<Jobs> {
               ),
             )),
             Text(
-              r"$" + job.price + "/h",
+              r"$" + jobb.price + "/h",
               style: TextStyle(
                 fontSize: 18,
               ),
