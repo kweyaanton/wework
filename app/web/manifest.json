@@ -1,6 +1,6 @@
 {
-    "name": "app",
-    "short_name": "app",
+    "name": "login_signup",
+    "short_name": "login_signup",
     "start_url": ".",
     "display": "standalone",
     "background_color": "#0175C2",

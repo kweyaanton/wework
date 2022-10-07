@@ -1,8 +1,6 @@
-import 'package:app/page/profile_page.dart';
-import'page/profile_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'login_page.dart';
+import 'package:login_signup/components/login_page.dart';
 
 void main() {
   runApp(const MyApp());
@@ -11,12 +9,11 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
 
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    // ignore: prefer_const_constructors
-    return MaterialApp(
+    return const MaterialApp(
       debugShowCheckedModeBanner: false,
-      // ignore: prefer_const_constructors
       home: HomePage(),
     );
   }
