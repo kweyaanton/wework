@@ -23,17 +23,19 @@ class Application {
 }
 
 List<Application> getApplications() {
+  var status = "pending";
+
   return <Application>[
-    Application("Flutter UI / UX Designer", "Nike Inc.", "Delivered", "40",
-        "assets/images/nike.png"),
-    Application("Product Designer", "Google LLC", "Opened", "60",
-        "assets/images/google.png"),
-    Application("UI / UX Designer", "Uber Technologies Inc.", "Cancelled", "55",
-        "assets/images/uber.png"),
-    Application("Lead UI / UX Designer", "Apple Inc.", "Delivered", "80",
-        "assets/images/apple.png"),
-    Application("Flutter UI Designer", "Amazon Inc.", "Not selected", "60",
-        "assets/images/amazon.jpg"),
+    Application("wework.", "delivery", status, "part-time",
+        "assets/images/delivery.jpg"),
+    Application("uganda cookery", "chef", status, "Part-Time",
+        "assets/images/farmer.jpg"),
+    Application("wework", "Baby siter", status, "per-day",
+        "assets/images/babysiter.jpg"),
+    Application("Namilyiango SS", "math tutor", status, "Part-week",
+        "assets/images/tutor.jpg"),
+    Application("uganda plumbers", "Plumbers", status, "plumber",
+        "assets/images/tutor.jpg"),
   ];
 }
 
@@ -51,16 +53,16 @@ class Job {
 
 List<Job> getJobs() {
   return <Job>[
-    Job("Flutter UI/UX", "Nike Inc.", "40", "Full-Time",
-        "assets/images/nike.png", "San Francisco, California"),
-    Job("Product Designer", "Google LLC", "60", "Part-Time",
-        "assets/images/google.png", "San Francisco, California"),
-    Job("UI / UX Designer", "Uber Technologies Inc.", "55", "Full-Time",
-        "assets/images/uber.png", "San Francisco, California"),
-    Job("Lead UI/UX Designer", "Apple Inc.", "80", "Part-Time",
-        "assets/images/apple.png", "San Francisco, California"),
-    Job("Flutter Developer", "Amazon Inc.", "60", "Full-Time",
-        "assets/images/amazon.jpg", "San Francisco, California"),
+    Job("wework.", "delivery", "4000", "part-time",
+        "assets/images/delivery.jpg", "Kampala, Bwayise"),
+    Job("uganda cookery", "chef", "12000", "Part-Time",
+        "assets/images/farmer.jpg", "Mukono, UCU"),
+    Job("wework", "Baby siter", "5000", "per-day",
+        "assets/images/babysiter.jpg", "kampala, nakawa"),
+    Job("Namilyiango SS", "math tutor", "50000", "Part-week",
+        "assets/images/tutor.jpg", "Mukono, Namiliyango"),
+    Job("uganda plumbers", "Plumbers", "60000", "plumber",
+        "assets/images/tutor.jpg", "Kampala , Kyebando"),
   ];
 }
 

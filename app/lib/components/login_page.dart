@@ -5,7 +5,6 @@ import 'package:login_signup/components/forget_password_page.dart';
 import 'package:login_signup/components/signup_page.dart';
 import 'package:login_signup/components/common/page_heading.dart';
 import 'package:login_signup/new/master.dart';
-import 'package:login_signup/pages/profile_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);

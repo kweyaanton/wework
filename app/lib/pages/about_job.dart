@@ -7,12 +7,12 @@ class CreateResume extends StatefulWidget {
 }
 
 class _CreateResumeState extends State<CreateResume> {
-  TextEditingController fName = TextEditingController();
+  TextEditingController jobType = TextEditingController();
   TextEditingController contact = TextEditingController();
-  TextEditingController proffesion = TextEditingController();
+  TextEditingController location = TextEditingController();
   TextEditingController country = TextEditingController();
   TextEditingController language = TextEditingController();
-  TextEditingController budget1 = TextEditingController();
+  TextEditingController price = TextEditingController();
   TextEditingController budget2 = TextEditingController();
   List<Widget> list = [];
 
@@ -21,7 +21,13 @@ class _CreateResumeState extends State<CreateResume> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: const Color(0xff3F0000),
-        title: const Text('Edit Resume'),
+        title: const Text(
+          'start task',
+          style: TextStyle(
+            fontSize: 12,
+            color: Colors.white,
+          ),
+        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -31,14 +37,17 @@ class _CreateResumeState extends State<CreateResume> {
             children: <Widget>[
               const SizedBox(height: 20),
               const Text(
-                'Create Resume',
-                style: TextStyle(fontWeight: FontWeight.bold, fontSize: 25.0),
+                'Details',
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 25.0,
+                ),
               ),
               const SizedBox(height: 40),
               Row(children: <Widget>[
                 Flexible(
                   child: TextField(
-                    controller: fName,
+                    controller: jobType,
                     decoration: InputDecoration(
                         enabledBorder: const OutlineInputBorder(
                           borderSide: BorderSide(width: 2),
@@ -46,7 +55,7 @@ class _CreateResumeState extends State<CreateResume> {
                         prefixIcon: const Icon(Icons.person),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(10.0)),
-                        hintText: 'First Name'),
+                        hintText: 'input job type'),
                   ),
                 ),
                 const SizedBox(width: 15),
@@ -66,7 +75,7 @@ class _CreateResumeState extends State<CreateResume> {
               ]),
               const SizedBox(height: 15),
               TextField(
-                controller: proffesion,
+                controller: location,
                 decoration: InputDecoration(
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(width: 2),
@@ -74,7 +83,7 @@ class _CreateResumeState extends State<CreateResume> {
                     prefixIcon: const Icon(Icons.work),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    hintText: 'Job Title'),
+                    hintText: 'Job location'),
               ),
               const SizedBox(height: 15),
               TextField(
@@ -86,7 +95,7 @@ class _CreateResumeState extends State<CreateResume> {
                     prefixIcon: const Icon(Icons.cast_for_education),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    hintText: 'Education'),
+                    hintText: 'country'),
               ),
               const SizedBox(height: 15),
               TextField(
@@ -98,11 +107,11 @@ class _CreateResumeState extends State<CreateResume> {
                     prefixIcon: const Icon(Icons.cast_for_education),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    hintText: 'Collage'),
+                    hintText: 'language'),
               ),
               const SizedBox(height: 15),
               TextField(
-                controller: budget1,
+                controller: price,
                 decoration: InputDecoration(
                     enabledBorder: const OutlineInputBorder(
                       borderSide: BorderSide(width: 2),
@@ -110,7 +119,7 @@ class _CreateResumeState extends State<CreateResume> {
                     prefixIcon: const Icon(Icons.cast_for_education_rounded),
                     border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    hintText: 'University'),
+                    hintText: 'price'),
               ),
               const SizedBox(height: 15),
               Row(
@@ -223,7 +232,7 @@ class _CreateResumeState extends State<CreateResume> {
                         MaterialPageRoute(builder: (context) => Master()))
                   },
                   child: const Text(
-                    'Forget password?',
+                    'submit',
                     style: TextStyle(
                       color: Color(0xff939393),
                       fontSize: 13,

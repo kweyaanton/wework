@@ -1,10 +1,30 @@
 import 'package:flutter/material.dart';
 import 'data.dart';
 
-class JobDetail extends StatelessWidget {
+class JobDetail extends StatefulWidget {
+  final Job jobb;
+
+  JobDetail({required this.jobb});
+
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    return (JobDetailState(job: jobb));
+  }
+}
+
+class JobDetailState extends State<JobDetail> {
   final Job job;
 
-  JobDetail({required this.job});
+  String dets = "apply now";
+
+  JobDetailState({required this.job});
+
+  void Status() {
+    setState(() {
+      dets = "applied";
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -112,7 +132,7 @@ class JobDetail extends StatelessWidget {
                     child: Container(
                       child: Center(
                         child: Text(
-                          r"$" + job.price + "/h",
+                          r"shs" + job.price + "/h",
                           style: TextStyle(
                             fontSize: 36,
                           ),
@@ -161,8 +181,10 @@ class JobDetail extends StatelessWidget {
                   SizedBox(
                     width: 16,
                   ),
-                  Expanded(
+                  GestureDetector(
+                    onTap: Status,
                     child: Container(
+                      width: 200,
                       height: 60,
                       decoration: BoxDecoration(
                         color: Colors.red[500],
@@ -172,7 +194,7 @@ class JobDetail extends StatelessWidget {
                       ),
                       child: Center(
                         child: Text(
-                          "Apply Now",
+                          dets,
                           style: TextStyle(
                             fontSize: 18,
                             fontWeight: FontWeight.bold,
