@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class WalletPage extends StatelessWidget {
+class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: walletPage(),
+      home: homePage(),
     );
   }
 }
 
-class walletPage extends StatefulWidget {
+class homePage extends StatefulWidget {
   @override
-  _walletPageState createState() => _walletPageState();
+  _homePageState createState() => _homePageState();
 }
 
-class _walletPageState extends State<walletPage> {
+class _homePageState extends State<homePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _walletPageState extends State<walletPage> {
                       width: 5,
                     ),
                     Text(
-                      "Wallet",
+                      "eWalle",
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'ubuntu',
@@ -79,7 +79,7 @@ class _walletPageState extends State<walletPage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "600",
+                        "20,600",
                         style: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.w700),
                       ),
@@ -179,6 +179,10 @@ class _walletPageState extends State<walletPage> {
                   serviceWidget("sendMoney", "Send\nMoney"),
                   serviceWidget("receiveMoney", "Receive\nMoney"),
                   serviceWidget("phone", "Mobile\nRecharge"),
+                  serviceWidget("electricity", "Electricity\nBill"),
+                  serviceWidget("tag", "Cashback\nOffer"),
+                  serviceWidget("movie", "Movie\nTicket"),
+                  serviceWidget("flight", "Flight\nTicket"),
                   serviceWidget("more", "More\n"),
                 ],
               ),
