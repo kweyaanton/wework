@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:login_signup/new/wallet.dart';
+import 'package:login_signup/WalletPage.dart';
 import 'applications.dart';
 import 'jobs.dart';
 import 'data.dart';
@@ -69,7 +69,7 @@ class _MasterState extends State<Master> {
               currentWidgetView = Applications();
               break;
             case "wallet":
-              currentWidgetView = wallet();
+              currentWidgetView = walletPage();
               break;
           }
           selectedItem = item;

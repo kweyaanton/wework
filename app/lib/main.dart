@@ -1,6 +1,7 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:login_signup/components/login_page.dart';
+import 'package:login_signup/pages/profile_page.dart';
 import 'WalletPage.dart';
 
 void main() {
@@ -41,7 +42,7 @@ class _HomePageState extends State<HomePage> {
         future: _initializeFirrebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return HomePage();
+            return LoginPage();
           }
           return const Center(
             child: CircularProgressIndicator(),
