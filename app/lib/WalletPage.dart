@@ -10,7 +10,7 @@ class WalletPage extends StatelessWidget {
   }
 }
 
-class walletPage extends StatefulWidget {
+class walletPages extends StatefulWidget {
   @override
   _walletPageState createState() => _walletPageState();
 }
