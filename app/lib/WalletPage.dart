@@ -1,21 +1,21 @@
 import 'package:flutter/material.dart';
 
-class HomePage extends StatelessWidget {
+class WalletPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: homePage(),
+      home: walletPage(),
     );
   }
 }
 
-class homePage extends StatefulWidget {
+class walletPage extends StatefulWidget {
   @override
-  _homePageState createState() => _homePageState();
+  _walletPageState createState() => _walletPageState();
 }
 
-class _homePageState extends State<homePage> {
+class _walletPageState extends State<walletPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -42,7 +42,7 @@ class _homePageState extends State<homePage> {
                       width: 5,
                     ),
                     Text(
-                      "eWalle",
+                      "Wallet",
                       style: TextStyle(
                           color: Colors.black,
                           fontFamily: 'ubuntu',
@@ -79,7 +79,7 @@ class _homePageState extends State<homePage> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Text(
-                        "20,600",
+                        "600",
                         style: TextStyle(
                             fontSize: 22, fontWeight: FontWeight.w700),
                       ),
@@ -178,11 +178,6 @@ class _homePageState extends State<homePage> {
                 children: [
                   serviceWidget("sendMoney", "Send\nMoney"),
                   serviceWidget("receiveMoney", "Receive\nMoney"),
-                  serviceWidget("phone", "Mobile\nRecharge"),
-                  serviceWidget("electricity", "Electricity\nBill"),
-                  serviceWidget("tag", "Cashback\nOffer"),
-                  serviceWidget("movie", "Movie\nTicket"),
-                  serviceWidget("flight", "Flight\nTicket"),
                   serviceWidget("more", "More\n"),
                 ],
               ),
