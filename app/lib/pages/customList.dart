@@ -25,7 +25,7 @@ class VideoDescription extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 2.0)),
           Text(
-            'price',
+            '$price',
             selectionColor: Colors.grey,
             style: const TextStyle(fontSize: 10.0),
           ),

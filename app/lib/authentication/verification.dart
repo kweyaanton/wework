@@ -1,6 +1,10 @@
+import 'dart:io';
 import 'package:file_picker/file_picker.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:login_signup/jobs/application/applications.dart';
+import 'package:login_signup/jobs/application/transactions.dart';
 import 'userData.dart';
 
 class verification extends StatefulWidget {
@@ -11,12 +15,26 @@ class verification extends StatefulWidget {
 }
 
 class _verificationState extends State<verification> {
+  PlatformFile? pickedFile;
+
+  Future uploadFile() async {
+    final Path = 'files/${pickedFile!.name}';
+    final file = File(pickedFile!.path!);
+    final ref = FirebaseStorage.instance.ref().child(Path);
+    await ref.putFile(file);
+  }
+
+  Future selectFile() async {
+    final result = await FilePicker.platform.pickFiles();
+
+    if (result == null) return;
+    setState(() {
+      pickedFile = result.files.first;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
-    TextEditingController firstname = TextEditingController();
-    TextEditingController lastname = TextEditingController();
-
-    final Storage storage = Storage();
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.blue,
@@ -45,50 +63,45 @@ class _verificationState extends State<verification> {
       ),
       body: Column(
         children: [
-          TextField(
-            controller: firstname,
+          if (pickedFile != null)
+            Expanded(
+              child: Container(
+                color: Colors.blue[100],
+                child: Center(
+                  child: Text(pickedFile!.name),
+                ),
+              ),
+            ),
+          const SizedBox(
+            height: 10,
+          ),
+          const TextField(
             decoration: InputDecoration(
-              border: InputBorder.none,
               hintText: 'first name',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          TextField(
-            controller: lastname,
+          const TextField(
             decoration: InputDecoration(
-              border: InputBorder.none,
               hintText: 'last name',
             ),
           ),
-          SizedBox(
+          const SizedBox(
             height: 10,
           ),
-          Center(
-            child: ElevatedButton(
-              onPressed: () async {
-                final results = await FilePicker.platform.pickFiles(
-                  allowMultiple: false,
-                  type: FileType.image,
-                );
-                if (results == null) {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    const SnackBar(
-                      content: Text('no file picked'),
-                    ),
-                  );
-                  return null;
-                }
-                final path = results.files.single.path!;
-                final fileName = results.files.single.name;
+          
+          
 
-                storage.uploadFile(path, fileName).then(
-                      (value) => print('done'),
-                    );
-              },
-              child: Text('upload national id'),
-            ),
+          ElevatedButton(
+            
+            onPressed: selectFile,
+            child: const Text('select file'),
+          ),
+          ElevatedButton(
+            onPressed: uploadFile,
+            child: const Text('upload file'),
           ),
         ],
       ),

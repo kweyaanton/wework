@@ -5,6 +5,10 @@ import 'package:login_signup/login/common/page_header.dart';
 import 'package:login_signup/login/forget_password_page.dart';
 import 'package:login_signup/login/signup_page.dart';
 import 'package:login_signup/login/common/page_heading.dart';
+import 'package:login_signup/pages/available.dart';
+import 'package:login_signup/ui/page/splash_page.dart';
+
+import '../ui/page/home_page.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -47,7 +51,7 @@ class _LoginPageState extends State<LoginPage> {
     Size size = MediaQuery.of(context).size;
     return SafeArea(
       child: Scaffold(
-        backgroundColor: const Color(0xffEEF1F3),
+        backgroundColor: Color.fromARGB(255, 204, 204, 204),
         body: Column(
           children: [
             const PageHeader(),
@@ -81,7 +85,7 @@ class _LoginPageState extends State<LoginPage> {
                               padding: const EdgeInsets.only(left: 20.0),
                               child: TextField(
                                 controller: _emailcontroller,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Email',
                                 ),
@@ -104,7 +108,7 @@ class _LoginPageState extends State<LoginPage> {
                               child: TextField(
                                 controller: _passwordcontroller,
                                 obscureText: true,
-                                decoration: InputDecoration(
+                                decoration: const InputDecoration(
                                   border: InputBorder.none,
                                   hintText: 'Password',
                                 ),
@@ -164,10 +168,10 @@ class _LoginPageState extends State<LoginPage> {
                               if (user != null) {
                                 Navigator.of(context).pushReplacement(
                                     MaterialPageRoute(
-                                        builder: (context) => application()));
+                                        builder: (context) => const SplashPage()));
                               }
                             },
-                            child: Text("login",
+                            child: const Text("login",
                                 style: TextStyle(
                                   color: Colors.white,
                                   fontSize: 18.0,

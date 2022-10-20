@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:login_signup/pages/available.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -25,7 +26,15 @@ class _HomePageState extends State<HomePage> {
       appBar: AppBar(
         backgroundColor: Colors.transparent,
         elevation: 0,
-        leading: Icon(Icons.menu),
+        leading: IconButton(
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const availabe()),
+            );
+          },
+          icon: Icon(Icons.menu),
+        ),
         title: Text("Home"),
         actions: <Widget>[
           Padding(

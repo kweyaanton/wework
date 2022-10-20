@@ -9,7 +9,12 @@ class PageHeader extends StatelessWidget {
     return SizedBox(
       width: double.infinity,
       height: size.height * 0.3,
-      child: Image.asset('assets/images/one.jpg'),
+      child: Card(
+        color: Color.fromARGB(255, 204, 204, 204),
+        shadowColor: Color.fromARGB(255, 204, 204, 204),
+        elevation: 8,
+        child: Image.asset('assets/images/logo.jpg')
+        ),
     );
   }
 }
