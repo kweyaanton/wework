@@ -124,15 +124,15 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
 
-  fonts:
+  #fonts:
     
   #       - asset: fonts/Schyler-Italic.ttf
   #         style: italic
-    - family: NotoSerif
-      fonts:
-        - asset: assets/fonts/NotoSerif-Regular.ttf
-        - asset: assets/fonts/NotoSerif-Bold.ttf
-          weight: 700
+  #  - family: NotoSerif
+  #    fonts:
+  #      - asset: assets/fonts/NotoSerif-Regular.ttf
+  #      - asset: assets/fonts/NotoSerif-Bold.ttf
+  #        weight: 700
 
 
   #   - family: Trajan Pro
