@@ -1,10 +1,10 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:login_signup/pages/available.dart';
 import 'package:login_signup/users/userPage.dart';
 import 'package:maps_launcher/maps_launcher.dart';
 import '../../jobs/application/applications.dart';
-import '../../pages/profile_page.dart';
-
 
 class HomePage1 extends StatefulWidget {
   const HomePage1({Key? key}) : super(key: key);
@@ -18,6 +18,34 @@ launchMap(lat, long) {
 }
 
 class _HomePageState extends State<HomePage1> {
+  var Dets = FirebaseAuth.instance.currentUser;
+
+
+   String FirstName= 'hello'; 
+        String LastName= '';
+        String Age = '';
+        String Gender = '';
+        String email = '';
+
+  fetchFeedBack() async {
+    await FirebaseFirestore.instance
+        .collection('Users')
+        .doc(Dets!.uid)
+        .get()
+        .then((ds) {
+      setState(() {
+        FirstName = ds.data()!['FirstName'];
+        LastName = ds.data()!['Last'];
+        Age = ds.data()!['Age'];
+        Gender = ds.data()!['Gender'];
+        email = ds.data()!['email'];
+      });
+    });
+  }
+
+
+
+
   PageController controller = PageController();
   @override
   void initState() {
@@ -36,30 +64,98 @@ class _HomePageState extends State<HomePage1> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
+        drawer: Drawer(backgroundColor: Colors.cyan,
+          // Add a ListView to the drawer. This ensures the user can scroll
+          // through the options in the drawer if there isn't enough vertical
+          // space to fit everything.
+          child: ListView(
+            // Important: Remove any padding from the ListView.
+            padding: EdgeInsets.zero,
+            children: [
+              Stack(
+                children: [
+                  Container(
+                    width: 130,
+                    height: 130,
+                    decoration: BoxDecoration(
+                        border: Border.all(width: 4, color: Colors.white),
+                        boxShadow: [
+                          BoxShadow(
+                              spreadRadius: 2,
+                              blurRadius: 10,
+                              color: Colors.black.withOpacity(0.1))
+                        ],
+                        shape: BoxShape.circle,
+                        image: const DecorationImage(
+                          fit: BoxFit.cover,
+                          image: AssetImage('assets/images/paint.jpg'),
+                        )),
+                  ),
+                  Positioned(
+                      bottom: 0,
+                      right: 0,
+                      child: Container(
+                        height: 40,
+                        width: 40,
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(width: 4, color: Colors.white),
+                            color: Colors.blue),
+                        child: const Icon(
+                          Icons.edit,
+                          color: Colors.white,
+                        ),
+                      )),
+
+                      
+                ],
+              ),
+              const SizedBox(height: 30),
+              FutureBuilder(
+                future: fetchFeedBack(),
+                builder: (context, snapshot) {
+                if (snapshot.connectionState != ConnectionState.done) {
+                  return ListTile(
+                  title: Text(
+                    'welcome back $FirstName',
+                    style: const TextStyle(decorationStyle: TextDecorationStyle.wavy,
+                      color: Color.fromARGB(255, 0, 0, 0),
+                    ),
+                  ),
+                  onTap: () {
+                    // Update the state of the app
+                    // ...
+                    // Then close the drawer
+                    Navigator.pop(context);
+                  },
+                );
+                }
+
+                return const Text('not done');
+              }),
+              ListTile(
+                title: const Text('Status'),
+                onTap: () {
+                  // Update the state of the app
+                  // ...
+                  // Then close the drawer
+                  Navigator.pop(context);
+                },
+              ),
+            ],
+          ),
+        ),
         appBar: AppBar(
           elevation: 20,
-          backgroundColor: Color.fromARGB(255, 19, 0, 0),
-          automaticallyImplyLeading: false,
+          backgroundColor: const Color.fromARGB(255, 207, 190, 190),
           leadingWidth: 40,
-          leading: TextButton(
-            onPressed: () {},
-            child: IconButton(
-              onPressed: () {
-                Navigator.push(
-                  context,
-                  MaterialPageRoute(builder: (context) => userPage()),
-                );
-              },
-              icon: Icon(Icons.menu),
-            ),
-          ),
           actions: [
             Container(
               height: 40.0,
               width: 40.0,
               margin: const EdgeInsets.only(right: 20, top: 10, bottom: 5),
               decoration: BoxDecoration(
-                color: Color.fromARGB(255, 40, 172, 169).withOpacity(0.5),
+                color: const Color.fromARGB(255, 40, 172, 169).withOpacity(0.5),
                 boxShadow: [
                   BoxShadow(
                     color: Color.fromARGB(255, 40, 172, 169).withOpacity(0.5),
@@ -96,7 +192,7 @@ class _HomePageState extends State<HomePage1> {
                         decoration: BoxDecoration(
                           boxShadow: [
                             BoxShadow(
-                              color: Color.fromARGB(255, 28, 51, 54)
+                              color: const Color.fromARGB(255, 28, 51, 54)
                                   .withOpacity(0.15),
                               blurRadius: 10,
                               offset: const Offset(0, 0),
@@ -128,23 +224,23 @@ class _HomePageState extends State<HomePage1> {
                       width: 45.0,
                       padding: const EdgeInsets.symmetric(horizontal: 10.0),
                       decoration: BoxDecoration(
-                        color: Color.fromARGB(255, 93, 114, 144),
+                        color: const Color.fromARGB(255, 93, 114, 144),
                         boxShadow: [
                           BoxShadow(
-                            color: Color.fromARGB(255, 40, 172, 169)
+                            color: const Color.fromARGB(255, 40, 172, 169)
                                 .withOpacity(0.5),
                             blurRadius: 10,
                             offset: const Offset(0, 0),
                           ),
-                        ], 
+                        ],
                         borderRadius: BorderRadius.circular(10.0),
                       ),
                       child: IconButton(
+                        padding: EdgeInsets.only(right: 20 ),
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) => userPage()),
+                            MaterialPageRoute(builder: (context) => userPage()),
                           );
                         },
                         icon: const Icon(Icons.assignment_ind_outlined),
@@ -203,7 +299,7 @@ class _HomePageState extends State<HomePage1> {
                                 },
                                 style: ButtonStyle(
                                     backgroundColor: MaterialStateProperty.all(
-                                  Color.fromARGB(255, 93, 114, 144),
+                                  const Color.fromARGB(255, 93, 114, 144),
                                 )),
                                 child: Padding(
                                   padding: const EdgeInsets.all(4),

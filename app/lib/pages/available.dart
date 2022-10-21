@@ -7,7 +7,6 @@ import 'package:login_signup/jobs/status/status.dart';
 import 'package:login_signup/ui/core/color.dart';
 import 'customList.dart';
 
-
 class availabe extends StatefulWidget {
   const availabe({super.key});
 
@@ -213,18 +212,17 @@ class _availabeState extends State<availabe> {
                 Expanded(
                   flex: 3,
                   child: Container(
+                    width: double.infinity,
+                    height: double.infinity,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image: NetworkImage(
-                            'https://media.istockphoto.com/photos/old-wall-picture-id171252466?k=20&m=171252466&s=612x612&w=0&h=KOdGL3zS5Ehgg5ON5KmYMzBO7tSMoRDFZ2pCoq2oXwM='),
+                        image:AssetImage('assets/images/paint.jpg'),
                         fit: BoxFit.cover,
                       ),
                       color: Colors.grey[300],
-                      borderRadius: BorderRadius.circular(20),
                     ),
-                    padding: const EdgeInsets.all(20.0),
                     child: Text(
-                      user.jobtype,
+                      '${user.jobtype}: needed',
                       style: const TextStyle(
                         color: black,
                         fontSize: 20.0,

@@ -50,13 +50,19 @@ class _transactionsState extends State<transactions> {
   }
 
   Widget buildUser(Clients user) => Card(
-    color: const Color.fromARGB(255, 251, 255, 0),
     child: GestureDetector(
           onTap: () {
             Navigator.of(context).pushReplacement(
                 MaterialPageRoute(builder: (context) => approval(UserId: user.UID,)));
           },
           child: Container(
+            decoration: BoxDecoration(
+                      image: const DecorationImage(
+                        image:AssetImage('assets/images/red.jpg'),
+                        fit: BoxFit.cover,
+                      ),
+                      color: Colors.grey[300],
+                    ),
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Row(
@@ -69,10 +75,10 @@ class _transactionsState extends State<transactions> {
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: const EdgeInsets.fromLTRB(10.0, 20.0, 0.0, 20.0),
+                      padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
                       child: Text(
-                        '${user.email}',
-                        style: TextStyle(
+                        user.email,
+                        style: const TextStyle(
                           color: black,
                           fontSize: 20.0,
                         ),

@@ -17,7 +17,7 @@ class VideoDescription extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[
           Text(
-            title,
+            'Location:  $title',
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               fontSize: 14.0,
@@ -25,8 +25,8 @@ class VideoDescription extends StatelessWidget {
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 2.0)),
           Text(
-            '$price',
-            selectionColor: Colors.grey,
+            'Shs:  $price',
+            selectionColor: Color.fromARGB(255, 4, 214, 252),
             style: const TextStyle(fontSize: 10.0),
           ),
           const Padding(padding: EdgeInsets.symmetric(vertical: 1.0)),

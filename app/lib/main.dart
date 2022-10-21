@@ -45,7 +45,7 @@ class _StartPageState extends State<StartPage> {
         future: _initializeFirrebase(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.done) {
-            return LoginPage();
+            return HomePage1();
           }
           return const Center(
             child: CircularProgressIndicator(),
