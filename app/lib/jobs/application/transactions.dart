@@ -62,6 +62,7 @@ class _transactionsState extends State<transactions> {
                         fit: BoxFit.cover,
                       ),
                       color: Colors.grey[300],
+                       borderRadius: BorderRadius.circular(20),
                     ),
             child: Padding(
               padding: EdgeInsets.all(20),
