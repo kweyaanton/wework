@@ -4,10 +4,9 @@ import 'package:login_signup/jobs/application/applications.dart';
 import 'package:login_signup/jobs/application/transactions.dart';
 import 'package:login_signup/jobs/data/jobs.dart';
 import 'package:login_signup/jobs/status/status.dart';
-import 'package:login_signup/pages/feedBack.dart';
 import 'package:login_signup/ui/core/color.dart';
 import 'customList.dart';
-import 'profile_page.dart';
+
 
 class availabe extends StatefulWidget {
   const availabe({super.key});
