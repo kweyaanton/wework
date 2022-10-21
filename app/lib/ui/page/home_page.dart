@@ -144,7 +144,7 @@ class _HomePageState extends State<HomePage1> {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => const ProfilePage()),
+                                builder: (context) => userPage()),
                           );
                         },
                         icon: const Icon(Icons.assignment_ind_outlined),
