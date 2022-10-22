@@ -2,10 +2,7 @@ import 'dart:io';
 import 'package:file_picker/file_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/material.dart';
-import 'package:image_picker/image_picker.dart';
 import 'package:login_signup/jobs/application/applications.dart';
-import 'package:login_signup/jobs/application/transactions.dart';
-import 'userData.dart';
 
 class verification extends StatefulWidget {
   const verification({super.key});
@@ -20,7 +17,7 @@ class _verificationState extends State<verification> {
   Future uploadFile() async {
     final Path = 'files/${pickedFile!.name}';
     final file = File(pickedFile!.path!);
-    final ref = FirebaseStorage.instance.ref().child(Path);
+    final ref = FirebaseStorage.instance.ref('data').child(Path);
     await ref.putFile(file);
   }
 
@@ -75,27 +72,51 @@ class _verificationState extends State<verification> {
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'first name',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: Padding(
+                padding: const EdgeInsets.only(left: 20.0),
+                child: TextField(
+                  decoration: const InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'FirstName',
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(
             height: 10,
           ),
-          const TextField(
-            decoration: InputDecoration(
-              hintText: 'last name',
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 25.0),
+            child: Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                border: Border.all(color: Colors.white),
+                borderRadius: BorderRadius.circular(12),
+              ),
+              child: const Padding(
+                padding: EdgeInsets.only(left: 20.0),
+                child: TextField(
+                  decoration: InputDecoration(
+                    border: InputBorder.none,
+                    hintText: 'LastName',
+                  ),
+                ),
+              ),
             ),
           ),
           const SizedBox(
             height: 10,
           ),
-          
-          
-
           ElevatedButton(
-            
             onPressed: selectFile,
             child: const Text('select file'),
           ),

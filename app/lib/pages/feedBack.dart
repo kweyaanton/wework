@@ -3,7 +3,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:login_signup/maps_screens/main.dart';
 import 'package:login_signup/maps_screens/store.dart';
 import 'package:login_signup/pages/available.dart';
 
@@ -44,7 +43,7 @@ class _feedBackPageState extends State<feedBackPage> {
               MaterialPageRoute(builder: (context) => const availabe()),
             );
           },
-          icon: Icon(Icons.menu),
+          icon: const Icon(Icons.arrow_circle_left_rounded),
         ),
         title: Text('FeedBack'),
       ),
@@ -55,19 +54,23 @@ class _feedBackPageState extends State<feedBackPage> {
               // ignore: curly_braces_in_flow_control_structures
               return Column(
                 children: [
-                  Container(
-                     decoration: BoxDecoration(
-              color: Color.fromARGB(255, 93, 114, 144),
-            ),
-                    child: ElevatedButton(
-                      onPressed: () {
-                        Navigator.of(context).pushReplacement(
-                            MaterialPageRoute(builder: (context) => MyApp2()));
-                      },
-                      child: const Text("Direction"),
+                  Card(
+                    child: Container(
+                      width: double.infinity,
+                      height: 40,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.of(context).pushReplacement(
+                              MaterialPageRoute(
+                                  builder: (context) => MyApp2()));
+                        },
+                        child: const Text("Direction"),
+                      ),
                     ),
                   ),
-                  const SizedBox(height: 20.0,),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
                   Center(
                     child: Text(
                       message,
@@ -81,7 +84,7 @@ class _feedBackPageState extends State<feedBackPage> {
                 ],
               );
 
-            return Text('not done');
+            return const Text('check your internet connection');
           }),
     );
   }

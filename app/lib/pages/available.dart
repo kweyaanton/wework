@@ -4,7 +4,9 @@ import 'package:login_signup/jobs/application/applications.dart';
 import 'package:login_signup/jobs/application/transactions.dart';
 import 'package:login_signup/jobs/data/jobs.dart';
 import 'package:login_signup/jobs/status/status.dart';
+import 'package:login_signup/pages/feedBack.dart';
 import 'package:login_signup/ui/core/color.dart';
+import 'package:login_signup/ui/page/home_page.dart';
 import 'customList.dart';
 
 class availabe extends StatefulWidget {
@@ -37,7 +39,7 @@ class _availabeState extends State<availabe> {
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => const availabe()),
+                MaterialPageRoute(builder: (context) => const HomePage1()),
               );
             },
             icon: const Icon(Icons.arrow_circle_left_rounded),
@@ -137,7 +139,7 @@ class _availabeState extends State<availabe> {
                                                 .pushReplacement(
                                                     MaterialPageRoute(
                                                         builder: (context) =>
-                                                            application()));
+                                                            feedBackPage()));
                                           },
                                           style: ButtonStyle(
                                               backgroundColor:
@@ -216,7 +218,7 @@ class _availabeState extends State<availabe> {
                     height: double.infinity,
                     decoration: BoxDecoration(
                       image: const DecorationImage(
-                        image:AssetImage('assets/images/paint.jpg'),
+                        image: AssetImage('assets/images/paint.jpg'),
                         fit: BoxFit.cover,
                       ),
                       color: Colors.grey[300],

@@ -1,9 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-
+import 'package:firebase_storage/firebase_storage.dart';
 import '../users/user.dart';
 import '../users/userPage.dart';
+import'package:image_picker/image_picker.dart';
+import 'dart:io';
 
 class ProfilePage extends StatefulWidget {
   const ProfilePage({super.key});
@@ -13,6 +15,7 @@ class ProfilePage extends StatefulWidget {
 }
 
 class _ProfilePageState extends State<ProfilePage> {
+  XFile? _image;
   Future createUserAccount(account user) async {
     var FirebaseID = FirebaseAuth.instance.currentUser;
 
@@ -76,26 +79,35 @@ class _ProfilePageState extends State<ProfilePage> {
                               color: Colors.black.withOpacity(0.1))
                         ],
                         shape: BoxShape.circle,
-                        image: const DecorationImage(
-                          fit: BoxFit.cover,
-                          image: NetworkImage('assets/images/profile_pic.jpg'),
+                        // ignore: prefer_const_constructors
+                        image:  DecorationImage(
+                      image: const NetworkImage(
+                          'https://media.istockphoto.com/photos/old-wall-background-picture-id1296377266?k=20&m=1296377266&s=612x612&w=0&h=0B9aq2sZyKPu9ipBFtWQ7aCW_HRwh5Hy3gwayAgc1b0='),
+                      fit: BoxFit.cover,
+                        
                         )),
                   ),
                   Positioned(
                       bottom: 0,
                       right: 0,
-                      child: Container(
-                        height: 40,
-                        width: 40,
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(width: 4, color: Colors.white),
-                            color: Colors.blue),
-                        child: const Icon(
-                          Icons.edit,
-                          color: Colors.white,
+                      child: InkWell(
+                        child: Container(
+                          height: 40,
+                          width: 40,
+                          decoration: BoxDecoration(
+                              shape: BoxShape.circle,
+                              border: Border.all(width: 4, color: Colors.white),
+                              color: Colors.blue),
+                          child: const Icon(
+                            Icons.edit,
+                            color: Colors.white,
+                          ),
                         ),
-                      ))
+                        onTap: () {
+                          showModalBottomSheet(context: context, builder: (context)=>bottomSheet(context));
+                        },
+                      )
+                  )
                 ],
               )),
               const SizedBox(height: 30),
@@ -267,4 +279,96 @@ class _ProfilePageState extends State<ProfilePage> {
       ),
     );
   }
+  
+ Widget bottomSheet(BuildContext context) {
+  Size size = MediaQuery.of(context).size;
+  return Container(
+    width: double.infinity,
+    height: size.height * 0.3,
+    margin:EdgeInsets.symmetric(
+      vertical: 20,
+      horizontal: 10
+    ),
+    child: Column(
+      children: [
+        const Text('Choose profile photo',
+        style: TextStyle(
+          fontSize: 20,
+          fontWeight: FontWeight.bold,
+        ),
+        ),
+        const SizedBox(
+          height: 50,
+        ),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+          InkWell(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children:const [ 
+                Icon(
+                  Icons.image,
+                  color: Colors.blue,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                Text(
+                  'Gallery',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue
+                ),
+                )
+              ],
+            ),
+            onTap: () async{
+              final ImagePicker _picker = ImagePicker();
+              final img = await _picker.pickImage(source: ImageSource.gallery);
+              if(img == null) return;
+              setState(() {
+                _image = img;
+              });
+            },
+          ),
+          const SizedBox(
+            width: 80,
+          ),
+          InkWell(
+            child: Column(
+              children: const [
+                Icon(
+                  Icons.camera_alt_sharp,
+                  color: Colors.blue,
+                ),
+                SizedBox(
+                  height: 5,
+                ),
+                 Text(
+                  'Camera',
+                style: TextStyle(
+                  fontSize: 20,
+                  fontWeight: FontWeight.bold,
+                  color: Colors.blue
+                ),
+                )
+              ],
+            ),
+            onTap: () async{
+              final ImagePicker _picker = ImagePicker();
+              final img = await _picker.pickImage(source: ImageSource.camera);
+              if(img ==null) return;
+              setState(() {
+                _image = img;
+              });
+            },
+          )
+        ],
+        )
+      ],
+    ),
+  );
+ }
 }

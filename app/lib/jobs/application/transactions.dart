@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:login_signup/jobs/application/approval.dart';
 import 'package:login_signup/jobs/data/clients.dart';
 import 'package:login_signup/ui/core/color.dart';
+import 'package:login_signup/ui/page/home_page.dart';
 
 class transactions extends StatefulWidget {
   const transactions({super.key});
@@ -22,8 +23,13 @@ class _transactionsState extends State<transactions> {
         backgroundColor: Color.fromARGB(255, 93, 114, 144),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
+          onPressed: () {
+            Navigator.push(
+              context,
+              MaterialPageRoute(builder: (context) => const HomePage1()),
+            );
+          },
+          icon: const Icon(Icons.arrow_circle_left_rounded),
         ),
         title: const Text("Transactions"),
       ),
@@ -50,20 +56,22 @@ class _transactionsState extends State<transactions> {
   }
 
   Widget buildUser(Clients user) => Card(
-    child: GestureDetector(
+        child: GestureDetector(
           onTap: () {
-            Navigator.of(context).pushReplacement(
-                MaterialPageRoute(builder: (context) => approval(UserId: user.UID,)));
+            Navigator.of(context).pushReplacement(MaterialPageRoute(
+                builder: (context) => approval(
+                      UserId: user.UID,
+                    )));
           },
           child: Container(
             decoration: BoxDecoration(
-                      image: const DecorationImage(
-                        image:AssetImage('assets/images/red.jpg'),
-                        fit: BoxFit.cover,
-                      ),
-                      color: Colors.grey[300],
-                       borderRadius: BorderRadius.circular(20),
-                    ),
+              image: const DecorationImage(
+                image: AssetImage('assets/images/green.jpg'),
+                fit: BoxFit.cover,
+              ),
+              color: Colors.grey[300],
+              borderRadius: BorderRadius.circular(20),
+            ),
             child: Padding(
               padding: EdgeInsets.all(20),
               child: Row(
@@ -72,11 +80,11 @@ class _transactionsState extends State<transactions> {
                   Expanded(
                     child: Container(
                       decoration: BoxDecoration(
-                        
                         color: Colors.grey[300],
                         borderRadius: BorderRadius.circular(20),
                       ),
-                      padding: const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 20.0),
+                      padding:
+                          const EdgeInsets.fromLTRB(10.0, 20.0, 10.0, 10.0),
                       child: Text(
                         user.email,
                         style: const TextStyle(
@@ -91,7 +99,7 @@ class _transactionsState extends State<transactions> {
             ),
           ),
         ),
-  );
+      );
 
   Stream<List<Clients>> readUsers() => FirebaseFirestore.instance
       .collection('application')

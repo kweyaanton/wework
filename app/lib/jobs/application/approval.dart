@@ -2,6 +2,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:login_signup/authentication/verification.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:login_signup/jobs/application/transactions.dart';
 import 'package:login_signup/jobs/data/clients.dart';
 
 import 'confirmations.dart';
@@ -20,8 +21,6 @@ class _approvalState extends State<approval> {
   _approvalState({required this.ClientDetails});
 
   var IDUser = FirebaseAuth.instance.currentUser;
-
-
 
   String id = '';
   String FirstName = 'hello';
@@ -50,44 +49,95 @@ class _approvalState extends State<approval> {
           future: fetchUser(),
           builder: (context, snapshot) {
             if (snapshot.connectionState != ConnectionState.done)
-              return Scaffold(
-                appBar: AppBar(
-                  title: Text(FirstName),
+              // ignore: curly_braces_in_flow_control_structures
+              return Container(
+                decoration: BoxDecoration(
+                  image: const DecorationImage(
+                    image: AssetImage('assets/images/temp.jpg'),
+                    fit: BoxFit.cover,
+                  ),
+                  color: Colors.grey[300],
                 ),
-                body: Column(children: [
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(child: Card(child: Text(LastName))),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(child: Card(child: Text(Age))),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  Center(child: Card(child: Text(Gender))),
-                  SizedBox(
-                    height: 20,
-                  ),
-                  ElevatedButton(
+                child: Scaffold(
+                  backgroundColor: Colors.transparent,
+                  appBar: AppBar(
+                    title: Text('Get back to $FirstName'),
+                    leading: IconButton(
                       onPressed: () {
-                        var person = confirmations(message: 'YOU HAVE BEEN APPROVED');
-                        approve(person);
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const transactions()),
+                        );
                       },
-                      child: Text('Approve')),
-                  SizedBox(
-                    height: 20,
+                      icon: const Icon(Icons.arrow_circle_left_rounded),
+                    ),
                   ),
-                  ElevatedButton(onPressed: () {
-                    FirebaseFirestore.instance
-                            .collection("application")
-                            .doc(IDUser!.uid)
-                            .collection('applicants')
-                            .doc(ClientDetails)
-                            .delete();
-                  }, child: Text('Decline')),
-                ]),
+                  body: Column(children: [
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                        color: const Color.fromARGB(255, 168, 175, 104),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 60.0,
+                            child: Text(
+                              LastName,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ))),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                        color: const Color.fromARGB(255, 168, 175, 104),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 60.0,
+                            child: Text(
+                              Age,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ))),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    Card(
+                        color: const Color.fromARGB(255, 168, 175, 104),
+                        child: SizedBox(
+                            width: double.infinity,
+                            height: 60.0,
+                            child: Text(
+                              Gender,
+                              style: const TextStyle(
+                                  fontSize: 14, fontWeight: FontWeight.bold),
+                            ))),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          var person =
+                              confirmations(message: 'YOU HAVE BEEN APPROVED');
+                          approve(person);
+                        },
+                        child: Text('Approve')),
+                    const SizedBox(
+                      height: 20,
+                    ),
+                    ElevatedButton(
+                        onPressed: () {
+                          FirebaseFirestore.instance
+                              .collection("application")
+                              .doc(IDUser!.uid)
+                              .collection('applicants')
+                              .doc(ClientDetails)
+                              .delete();
+                        },
+                        child: Text('Decline')),
+                  ]),
+                ),
               );
 
             return Text('not done');
@@ -95,13 +145,15 @@ class _approvalState extends State<approval> {
     );
   }
 
-
-
-   Future approve(confirmations user) async {
-  final data = FirebaseFirestore.instance.collection('Users').doc(ClientDetails).collection('Status').doc(ClientDetails);
-  final json = user.toCloud();
-  await data.set(json);
-   }
+  Future approve(confirmations user) async {
+    final data = FirebaseFirestore.instance
+        .collection('Users')
+        .doc(ClientDetails)
+        .collection('Status')
+        .doc(ClientDetails);
+    final json = user.toCloud();
+    await data.set(json);
+  }
 
   fetchUser() async {
     await FirebaseFirestore.instance

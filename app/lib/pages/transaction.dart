@@ -22,9 +22,13 @@ class _availabeState extends State<availabe> {
         backgroundColor: Color.fromARGB(255, 93, 114, 144),
         elevation: 0,
         leading: IconButton(
-          onPressed: () {},
-          icon: Icon(Icons.menu),
-        ),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const availabe()),
+              );
+            },
+            icon: const Icon(Icons.arrow_circle_left_rounded)),
         title: const Text(
           "Clients",
           style: TextStyle(
